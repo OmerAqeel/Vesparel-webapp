@@ -9,7 +9,11 @@ import {
     NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 
-export function Navbar() {
+interface NavbarProps {
+    onNavigate?: (page: string) => void
+}
+
+export function Navbar({ onNavigate }: NavbarProps) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
     const toggleMobileMenu = () => {
@@ -23,19 +27,32 @@ export function Navbar() {
                     <NavigationMenuList className="flex-wrap">
                         <NavigationMenuItem>
                             <NavigationMenuLink asChild>
-                                <a href="/" className="text-lg sm:text-xl md:text-2xl font-bold px-2 sm:px-4 md:px-6 py-2 sm:py-3 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground rounded-md transition-colors">
-                                    Vesparel
-                                </a>
+                                <button
+                                    onClick={() => onNavigate?.("home")}
+                                    className="flex items-center px-2 sm:px-4 md:px-6 py-1 sm:py-1 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground rounded-md transition-colors"
+                                >
+                                    <img src="/IMG_0663.PNG" alt="Vesparel Logo" className="h-20 sm:h-24 md:h-28 w-auto object-contain -my-6 sm:-my-8" />
+                                </button>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                         <NavigationMenuItem className="hidden sm:block">
                             <NavigationMenuLink asChild>
-                                <a href="/" className="text-sm sm:text-base px-2 sm:px-3 md:px-4 py-1 sm:py-2 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground rounded-md transition-colors">Home</a>
+                                <button
+                                    onClick={() => onNavigate?.("home")}
+                                    className="text-sm sm:text-base px-2 sm:px-3 md:px-4 py-1 sm:py-2 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground rounded-md transition-colors"
+                                >
+                                    Home
+                                </button>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                         <NavigationMenuItem className="hidden sm:block">
                             <NavigationMenuLink asChild>
-                                <a href="/about" className="text-sm sm:text-base px-2 sm:px-3 md:px-4 py-1 sm:py-2 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground rounded-md transition-colors">About Us</a>
+                                <button
+                                    onClick={() => onNavigate?.("about")}
+                                    className="text-sm sm:text-base px-2 sm:px-3 md:px-4 py-1 sm:py-2 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground rounded-md transition-colors"
+                                >
+                                    About Us
+                                </button>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                         <NavigationMenuItem className="hidden md:block">
@@ -44,9 +61,9 @@ export function Navbar() {
                                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                                     <li className="row-span-3">
                                         <NavigationMenuLink asChild>
-                                            <a
+                                            <button
+                                                onClick={() => onNavigate?.("catalogue")}
                                                 className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                                                href="/catalogue"
                                             >
                                                 <div className="mb-2 mt-4 text-lg font-medium">
                                                     Browse Our Collection
@@ -54,7 +71,7 @@ export function Navbar() {
                                                 <p className="text-sm leading-tight text-muted-foreground">
                                                     Discover our wide range of products and find exactly what you're looking for.
                                                 </p>
-                                            </a>
+                                            </button>
                                         </NavigationMenuLink>
                                     </li>
                                     <li>
@@ -102,12 +119,22 @@ export function Navbar() {
                         </NavigationMenuItem>
                         <NavigationMenuItem className="hidden md:block">
                             <NavigationMenuLink asChild>
-                                <a href="/faq" className="text-sm sm:text-base px-2 sm:px-3 md:px-4 py-1 sm:py-2 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground rounded-md transition-colors">FAQ's</a>
+                                <button
+                                    onClick={() => onNavigate?.("faq")}
+                                    className="text-sm sm:text-base px-2 sm:px-3 md:px-4 py-1 sm:py-2 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground rounded-md transition-colors"
+                                >
+                                    FAQ's
+                                </button>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                         <NavigationMenuItem className="hidden md:block">
                             <NavigationMenuLink asChild>
-                                <a href="/contact" className="text-sm sm:text-base px-2 sm:px-3 md:px-4 py-1 sm:py-2 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground rounded-md transition-colors">Contact Us</a>
+                                <button
+                                    onClick={() => onNavigate?.("contact")}
+                                    className="text-sm sm:text-base px-2 sm:px-3 md:px-4 py-1 sm:py-2 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground rounded-md transition-colors"
+                                >
+                                    Contact Us
+                                </button>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                     </NavigationMenuList>
@@ -154,41 +181,51 @@ export function Navbar() {
             {isMobileMenuOpen && (
                 <div className="sm:hidden absolute top-full left-0 w-full bg-white border-b shadow-lg z-50 animate-in slide-in-from-top-2 duration-300">
                     <div className="px-4 py-2 space-y-1">
-                        <a
-                            href="/"
-                            className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors duration-200"
-                            onClick={() => setIsMobileMenuOpen(false)}
+                        <button
+                            onClick={() => {
+                                onNavigate?.("home")
+                                setIsMobileMenuOpen(false)
+                            }}
+                            className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors duration-200"
                         >
                             Home
-                        </a>
-                        <a
-                            href="/about"
-                            className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors duration-200"
-                            onClick={() => setIsMobileMenuOpen(false)}
+                        </button>
+                        <button
+                            onClick={() => {
+                                onNavigate?.("about")
+                                setIsMobileMenuOpen(false)
+                            }}
+                            className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors duration-200"
                         >
                             About Us
-                        </a>
-                        <a
-                            href="/catalogue"
-                            className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors duration-200"
-                            onClick={() => setIsMobileMenuOpen(false)}
+                        </button>
+                        <button
+                            onClick={() => {
+                                onNavigate?.("catalogue")
+                                setIsMobileMenuOpen(false)
+                            }}
+                            className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors duration-200"
                         >
                             Catalogue
-                        </a>
-                        <a
-                            href="/faq"
-                            className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors duration-200"
-                            onClick={() => setIsMobileMenuOpen(false)}
+                        </button>
+                        <button
+                            onClick={() => {
+                                onNavigate?.("faq")
+                                setIsMobileMenuOpen(false)
+                            }}
+                            className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors duration-200"
                         >
                             FAQ's
-                        </a>
-                        <a
-                            href="/contact"
-                            className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors duration-200"
-                            onClick={() => setIsMobileMenuOpen(false)}
+                        </button>
+                        <button
+                            onClick={() => {
+                                onNavigate?.("contact")
+                                setIsMobileMenuOpen(false)
+                            }}
+                            className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors duration-200"
                         >
                             Contact Us
-                        </a>
+                        </button>
 
                         {/* Mobile Search */}
                         <div className="pt-2">

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Instagram, Facebook, Twitter } from 'lucide-react'
 
 export const Message = () => {
@@ -6,9 +5,13 @@ export const Message = () => {
         <div className="bg-gray-100 py-1 sm:py-2 px-3 sm:px-4 md:px-6 border-b border-gray-200">
             <div className="flex items-center justify-between text-xs sm:text-sm">
                 {/* Welcome Message */}
-                <div className="text-gray-700 truncate">
-                    <span className="hidden sm:inline">Welcome to Vesparel - Your Premium Shopping Destination</span>
-                    <span className="sm:hidden">Welcome to Vesparel</span>
+                <div className="text-center flex-1">
+                    <h2 className="text-sm sm:text-base md:text-lg font-semibold text-gray-800">
+                        Welcome to Vesparel - Pakistan's Premier Online Shopping Destination
+                    </h2>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-1 hidden sm:block">
+                        Quality products delivered across Pakistan | Call +92 300 1234567 to order
+                    </p>
                 </div>
 
                 {/* Social Media Links */}
